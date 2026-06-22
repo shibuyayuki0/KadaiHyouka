@@ -1,0 +1,56 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!-- View側 (Index.cshtml) -->
+@* <ul>
+    @foreach (var item in Model.TaskList)
+    {
+        <li>@item</li>
+    }
+</ul> *@
+
+<!-- ヘッダーパーツ -->
+@section AdditionalHeader {
+    <!-- タスクリスト項目名 -->
+    <div class="row align-items-center">
+        <!-- タスク名 -->
+        <div class="col-6 col-sm-7 col-md-6 fw-bold">タスク名</div>
+        <!-- 期限 -->
+        <div class="col fw-bold">期限</div>
+        <!-- フィルター -->
+        <div class="col-4 col-md-3 d-inline-block">
+            <form method="get" class="input-group w-auto flex-nowrap">
+                <label class="input-group-text d-none d-xl-inline-block">表示</label>
+                <select asp-for="SelectedFilter" asp-items="@Model.FilterList" class="form-select" onchange="this.form.submit()"></select>
+            </form>
+        </div>
+    </div>
+}
+
+<div class="container">
+    @foreach (var item in Model.TaskList)
+    {
+
+        <!-- タスク1件 -->
+        <div class="row">
+            <div class="d-flex align-items-center shadow border rounded-3 py-2 mb-3" data-id="@item.TASK_ID">
+                <!-- タスク名 -->
+                <div class="col-5 col-sm-6 col-md-5 fw-bold">@item.TASK_NAME</div>
+                <!-- 担当者名 -->
+                <div class="col fw-bold">@item.ASSIGNEE</div>
+
+                <!-- 期限 -->
+                <div class="col fw-bold">@item.DUE_DATE.ToString()</div>
+                <!-- ステータス -->
+                <div class="col fw-bold">@item.STATUS</div>
+
+                <a asp-page="/Edit" asp-route-id="@item.TASK_ID" class="btn btn-primary">編集</a>
+                
+            </div>
+        </div>
+
+    }
+</div>

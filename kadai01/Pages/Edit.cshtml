@@ -1,0 +1,57 @@
+﻿@page "{id:int}"
+@model kadai01.Pages.EditModel
+@{
+}
+
+<div class="container my-5">
+    <form method="post">
+        <h1 class="text-center mb-5">@Model.FormTitle</h1>
+
+        <!-- タスク名 -->
+        <div class="row mb-3">
+            <label asp-for="TASK_NAME" class="col-2 col-form-label"></label>
+            <div class="col-10">
+                <input type="text" asp-for="TASK_NAME" class="form-control" />
+                <span asp-validation-for="TASK_NAME" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- 担当者名 -->
+        <div class="row mb-3">
+            <label asp-for="ASSIGNEE" class="col-2 col-form-label"></label>
+            <div class="col-10">
+                <input type="text" asp-for="ASSIGNEE" class="form-control" />
+                <span asp-validation-for="ASSIGNEE" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- ステータス -->
+        <div class="row mb-3">
+            <label asp-for="STATUS" class="col-2 col-form-label"></label>
+            <div class="col-10">
+                <select asp-for="STATUS" asp-items="@Model.Options" class="form-select"></select>
+            </div>
+        </div>
+        <!-- 期限 -->
+        <div class="row mb-3">
+            <label asp-for="DUE_DATE" class="col-2 col-form-label"></label>
+            <div class="col-10">
+                <input type="date" asp-for="DUE_DATE" class="form-control" />
+                <span asp-validation-for="DUE_DATE" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- ボタン関連 -->
+        <div class="row text-center">
+            <!-- 作成/更新ボタン -->
+            <div class="col-6">
+                <input type="hidden" asp-for="FormTitle" />
+                <input type="hidden" asp-for="PostButtonName" />
+                <button type="submit" class="btn btn-primary">@Model.PostButtonName</button>
+            </div>
+            <!-- キャンセルボタン -->
+            <div class="col">
+                <a asp-page="/Index" class="btn btn-outline-danger">キャンセル</a>
+            </div>
+        </div>
+    </form>
+</div>
